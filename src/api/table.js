@@ -1,9 +1,9 @@
 import request from '@/utils/request'
 
-export function getList(params) {
+export function getProject(data) {
   return request({
-    url: '/vue-admin-template/table/list',
-    method: 'get',
-    params
+    url: '/fileService/project/query',
+    method: 'post',
+    data
   })
 }

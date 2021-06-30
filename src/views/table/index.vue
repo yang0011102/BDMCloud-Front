@@ -13,38 +13,69 @@
           {{ scope.$index }}
         </template>
       </el-table-column>
-      <el-table-column label="Title">
+      <el-table-column label="project name">
         <template slot-scope="scope">
-          {{ scope.row.title }}
+          {{ scope.row.projectName }}
         </template>
       </el-table-column>
-      <el-table-column label="Author" width="110" align="center">
+      <el-table-column label="create by" width="110" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.author }}</span>
+          <span>{{ scope.row.createBy }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Pageviews" width="110" align="center">
+      <el-table-column label="modify time" width="110" align="center">
         <template slot-scope="scope">
-          {{ scope.row.pageviews }}
+          {{ scope.row.modifyTime }}
         </template>
       </el-table-column>
-      <el-table-column class-name="status-col" label="Status" width="110" align="center">
-        <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column align="center" prop="created_at" label="Display_time" width="200">
-        <template slot-scope="scope">
-          <i class="el-icon-time" />
-          <span>{{ scope.row.display_time }}</span>
-        </template>
-      </el-table-column>
+
     </el-table>
+
+    <!--    <el-table-->
+    <!--      v-loading="listLoading"-->
+    <!--      :data="list"-->
+    <!--      element-loading-text="Loading"-->
+    <!--      border-->
+    <!--      fit-->
+    <!--      highlight-current-row-->
+    <!--    >-->
+    <!--      <el-table-column align="center" label="ID" width="95">-->
+    <!--        <template slot-scope="scope">-->
+    <!--          {{ scope.$index }}-->
+    <!--        </template>-->
+    <!--      </el-table-column>-->
+    <!--      <el-table-column label="Title">-->
+    <!--        <template slot-scope="scope">-->
+    <!--          {{ scope.row.title }}-->
+    <!--        </template>-->
+    <!--      </el-table-column>-->
+    <!--      <el-table-column label="Author" width="110" align="center">-->
+    <!--        <template slot-scope="scope">-->
+    <!--          <span>{{ scope.row.author }}</span>-->
+    <!--        </template>-->
+    <!--      </el-table-column>-->
+    <!--      <el-table-column label="Pageviews" width="110" align="center">-->
+    <!--        <template slot-scope="scope">-->
+    <!--          {{ scope.row.pageviews }}-->
+    <!--        </template>-->
+    <!--      </el-table-column>-->
+    <!--      <el-table-column class-name="status-col" label="Status" width="110" align="center">-->
+    <!--        <template slot-scope="scope">-->
+    <!--          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>-->
+    <!--        </template>-->
+    <!--      </el-table-column>-->
+    <!--      <el-table-column align="center" prop="created_at" label="Display_time" width="200">-->
+    <!--        <template slot-scope="scope">-->
+    <!--          <i class="el-icon-time" />-->
+    <!--          <span>{{ scope.row.display_time }}</span>-->
+    <!--        </template>-->
+    <!--      </el-table-column>-->
+    <!--    </el-table>-->
   </div>
 </template>
 
 <script>
-import { getList } from '@/api/table'
+import { getProject } from '@/api/table'
 
 export default {
   filters: {
@@ -69,7 +100,13 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      getList().then(response => {
+      getProject(
+        {
+          page: 1,
+          pageSize: 10
+        }
+      ).then(response => {
+        console.log(response)
         this.list = response.data.items
         this.listLoading = false
       })

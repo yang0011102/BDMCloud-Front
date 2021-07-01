@@ -146,7 +146,8 @@ export default {
       console.log('确认表单')
     },
     handleCreateProject() {
-      router.push({ path: '/project/index', query: { projectID: '!23' }})
+      console.log('新建工程')
+      // router.push({ path: '/project/index', query: { projectID: '!23' }})
     }
   }
 }

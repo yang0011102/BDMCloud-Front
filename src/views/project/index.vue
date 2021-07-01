@@ -1,5 +1,6 @@
 <template>
   <div class="dashboard-container">
+    <!--    文件目录-->
     <el-container>
       <el-header>
         <!--        <div class="dashboard-text">projectID: {{ this.$route.query.projectID }}</div>-->
@@ -27,7 +28,7 @@
           </el-table-column>
           <el-table-column label="name">
             <template slot-scope="scope">
-              <el-button type="text" @click="handleClickRow(scope.$index, scope.row)">{{
+              <el-button type="text" @click="handleClickFolderRow(scope.$index, scope.row)">{{
                 scope.row.name
               }}
               </el-button>
@@ -62,6 +63,7 @@
         </el-table>
       </el-main>
     </el-container>
+    <!--    文件列表-->
     <el-container>
       <el-table
         v-loading="fileLoading"
@@ -114,6 +116,7 @@ export default {
     },
     handleClickFolderRow(index, row) {
       console.log(index, row)
+      this.fileLoading = false
     },
     handleNodeClick(data) {
       // 点击目录时获得该目录下的文件列表
@@ -134,9 +137,10 @@ export default {
       queryFolder({ projectID: this.$route.query.projectID })
         .then(r => {
           console.log(r)
-          this.folderList = r
-          this.folderLoading = false
+          this.folderList = r['list']
+          // this.folderLoading = false
         })
+      this.folderLoading = false
     }
 
   }

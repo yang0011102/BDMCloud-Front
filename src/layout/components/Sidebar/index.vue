@@ -25,13 +25,24 @@ import SidebarItem from './SidebarItem'
 import variables from '@/styles/variables.scss'
 
 export default {
+  // data(){
+  //   return {
+  //     route
+  //   }
+  // },
   components: { SidebarItem, Logo },
   computed: {
     ...mapGetters([
       'sidebar'
     ]),
     routes() {
-      return this.$router.options.routes
+      const r = this.$router.options.routes;
+      for (const i in r) {
+        if (r[i]['path'] === '/project') {
+          r.splice(i, 1)
+        }
+      }
+      return r
     },
     activeMenu() {
       const route = this.$route

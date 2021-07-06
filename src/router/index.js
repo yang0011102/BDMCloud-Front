@@ -66,7 +66,6 @@ export const constantRoutes = [
       }
     ]
   },
-
   {
     path: '/example',
     component: Layout,

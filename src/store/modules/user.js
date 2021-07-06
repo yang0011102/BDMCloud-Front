@@ -32,6 +32,9 @@ const mutations = {
   },
   SET_ActivateRole: (state, role) => {
     state.activate_role = role // 存所有的角色
+  },
+  set_userID: (state, useID) => {
+    state.userID = useID // 存userID
   }
   // GET_ActivateRole: (state) => { state.activate_role }
 }
@@ -44,6 +47,7 @@ const actions = {
       login({ username: username.trim(), password: password }).then(response => {
         // const { data } = response
         commit('SET_TOKEN', response['accessToken'])
+        commit('set_userID', response['userID'])
         setToken(response['accessToken'])
         setRefreshToken(response['refreshToken'])
         setUserID(response['userID'])

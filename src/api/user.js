@@ -1,11 +1,11 @@
 import request from '@/utils/request'
 
 import { JSEncrypt } from 'jsencrypt'
-import { getUserID } from '@/utils/auth'
+import {getToken, getUserID} from '@/utils/auth'
 
 export function getVerificationCode(username) {
   return request({
-    url: '/author/user/verificationCode?username=' + username,
+    url: '/user/verificationCode?username=' + username,
     method: 'get'
   })
 }
@@ -21,7 +21,7 @@ export function login(data) {
     })
     .then(() => {
       return request({
-        url: '/author/user/login',
+        url: '/user/login',
         method: 'post',
         data
       })
@@ -30,11 +30,11 @@ export function login(data) {
 
 export function getInfo() {
   return request({
-    url: '/author/userInfo/get?userID=' + String(getUserID()),
-    method: 'get'
-    // headers: {
-    //   'Authorization': getToken()
-    // }
+    url: '/userInfo/get?userID=' + String(getUserID()),
+    method: 'get',
+    headers: {
+      'Authorization': getToken()
+    }
   })
 }
 

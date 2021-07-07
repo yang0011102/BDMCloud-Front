@@ -4,7 +4,10 @@ export function createFileList(data) {
   return request({
     url: '/fileService/folder/createFileList',
     method: 'post',
-    data
+    data,
+    headers: {
+      'Authorization': getToken()
+    }
   })
 }
 
@@ -12,7 +15,10 @@ export function updateFileList(data) {
   return request({
     url: '/fileService/folder/updateFileList',
     method: 'post',
-    data
+    data,
+    headers: {
+      'Authorization': getToken()
+    }
   })
 }
 
@@ -39,6 +45,7 @@ export function queryFolder(data) {
     data
   })
 }
+
 export function deleteFolder(data) {
   return request({
     url: '/fileService/folder/delete',
